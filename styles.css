@@ -1,0 +1,92 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #333;
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.toolbar {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.title-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.title {
+    font-size: 2rem;
+    color: white;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+}
+
+.clear-button, .eraser-button, .pen-button {
+    background-color: #ff4c4c;
+    border: none;
+    color: white;
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.clear-button:hover, .eraser-button:hover, .pen-button:hover {
+    background-color: #ff1c1c;
+}
+
+.pen-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.color-picker {
+    width: 40px;
+    height: 40px;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+canvas {
+    border: 2px solid #fff;
+    background-color: #000;
+    cursor: url('chalk.png'), auto; 
+    display: block;
+}
+
+.eraser {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    border: 1px solid #000;
+    cursor: pointer;
+    border-radius: 50%;
+    display: none;
+}
