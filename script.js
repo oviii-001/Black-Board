@@ -12,32 +12,19 @@ let erasing = false;
 let eraserMoving = false;
 let eraserSize = 20;
 
-const chalkCursor = new Image();
-chalkCursor.src = 'chalk.png';
+canvas.addEventListener('mousedown', startDrawing);
+canvas.addEventListener('mouseup', stopDrawing);
+canvas.addEventListener('mousemove', draw);
 
-chalkCursor.onload = function() {
-    canvas.addEventListener('mousedown', startDrawing);
-    canvas.addEventListener('mouseup', stopDrawing);
-    canvas.addEventListener('mousemove', draw);
+colorPicker.addEventListener('input', (e) => {
+    currentColor = e.target.value;
+    erasing = false;
+    updateCursor();
+});
 
-    colorPicker.addEventListener('input', (e) => {
-        currentColor = e.target.value;
-        erasing = false;
-        updateCursor();
-    });
-
-    eraser.addEventListener('mousedown', startEraser);
-    eraser.addEventListener('mouseup', stopEraser);
-    document.addEventListener('mousemove', moveEraser);
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'e' || e.key === 'E') {
-            toggleEraser();
-        } else if (e.key === 'p' || e.key === 'P') {
-            togglePen();
-        }
-    });
-};
+eraser.addEventListener('mousedown', startEraser);
+eraser.addEventListener('mouseup', stopEraser);
+document.addEventListener('mousemove', moveEraser);
 
 function startDrawing(e) {
     if (erasing) return;
@@ -48,7 +35,6 @@ function startDrawing(e) {
 function stopDrawing() {
     drawing = false;
     context.beginPath();
-    updateCursor();
 }
 
 function draw(e) {
@@ -61,8 +47,6 @@ function draw(e) {
     context.stroke();
     context.beginPath();
     context.moveTo(e.clientX, e.clientY);
-
-    canvas.style.cursor = `url('${chalkCursor.src}'), auto`;
 }
 
 function clearBoard() {
@@ -88,6 +72,14 @@ function moveEraser(e) {
     }
 }
 
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'e' || e.key === 'E') {
+        toggleEraser();
+    } else if (e.key === 'p' || e.key === 'P') {
+        togglePen();
+    }
+});
+
 function toggleEraser() {
     if (eraser.style.display === 'none') {
         eraser.style.display = 'block';
@@ -110,6 +102,6 @@ function updateCursor() {
     if (erasing) {
         canvas.style.cursor = 'crosshair';
     } else {
-        canvas.style.cursor = `url('${chalkCursor.src}'), auto`;
+        canvas.style.cursor = `url('chalk.png'), auto`;
     }
 }
